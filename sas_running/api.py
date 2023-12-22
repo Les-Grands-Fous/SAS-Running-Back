@@ -1,6 +1,4 @@
-import uvicorn
 from fastapi import FastAPI
-from pydantic import BaseModel
 from sas_running.routes.users import router as user_router
 from sas_running.routes.runs import router as run_router
 

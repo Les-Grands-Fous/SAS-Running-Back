@@ -1,10 +1,6 @@
 from datetime import date
 from enum import Enum
-from uuid import UUID
-from typing import Optional
-
-from pydantic import BaseModel
-from sqlmodel import Field, SQLModel, create_engine
+from sqlmodel import Field, SQLModel
 
 
 class Gender(Enum):
