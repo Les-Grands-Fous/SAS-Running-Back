@@ -10,6 +10,7 @@ class RunBase(SQLModel):
 
 class Run(RunBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
+    user_id: int | None = Field(default=None, foreign_key="user.id")
 
 
 class RunCreate(RunBase):
