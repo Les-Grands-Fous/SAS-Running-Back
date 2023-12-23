@@ -4,8 +4,8 @@ from sqlmodel import Field, SQLModel
 
 
 class Gender(Enum):
-    MEN = "men"
-    WOMEN = "women"
+    MAN = "man"
+    WOMAN = "woman"
     OTHER = "other"
 
 
