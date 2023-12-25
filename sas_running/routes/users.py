@@ -16,20 +16,42 @@ def get_users(*, user_controller: UserController = Depends(get_user_controller))
 
 
 @router.get("/{user_id}")
-def get_user_by_id(*,  user_id: int, user_controller: UserController = Depends(get_user_controller)):
+def get_user_by_id(
+    *, user_id: int, user_controller: UserController = Depends(get_user_controller)
+):
     return user_controller.get_user_by_id(user_id)
 
 
 @router.post("/")
-def create_user(*,  user_create: UserCreate, user_controller: UserController = Depends(get_user_controller)):
+def create_user(
+    *,
+    user_create: UserCreate,
+    user_controller: UserController = Depends(get_user_controller)
+):
     return user_controller.create_user(user_create)
 
 
 @router.delete("/{user_id}")
-def delete_user(*,  user_id: int, user_controller: UserController = Depends(get_user_controller)):
+def delete_user(
+    *, user_id: int, user_controller: UserController = Depends(get_user_controller)
+):
     user_controller.delete_user(user_id)
 
 
 @router.patch("/{user_id}")
-def update_user(*, user_id: int, user_update: UserUpdate, user_controller: UserController = Depends(get_user_controller)):
+def update_user(
+    *,
+    user_id: int,
+    user_update: UserUpdate,
+    user_controller: UserController = Depends(get_user_controller)
+):
     return user_controller.update_user(user_id, user_update)
+
+
+@router.get("/{user_id}/runs")
+def get_user_runs(
+    *,
+    user_id: int,
+    user_controller: UserController = Depends(get_user_controller)
+):
+    return user_controller.get_user_runs(user_id)

@@ -1,25 +1,28 @@
-from uuid import UUID
-from typing import Optional
-
-from pydantic import BaseModel
-from sqlmodel import Field, SQLModel, create_engine
+from datetime import date
+from enum import Enum
+from sqlmodel import Field, SQLModel
 
 
-class User(SQLModel, table=True):
+class Gender(Enum):
+    MAN = "man"
+    WOMAN = "woman"
+    OTHER = "other"
+
+
+class UserBase(SQLModel):
+    first_name: str
+    last_name: str
+    birth_date: date
+    gender: Gender
+
+
+class User(UserBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
-    first_name: str
-    last_name: str
-    age: int
-    sex: str
 
 
-class UserCreate(BaseModel):
-    first_name: str
-    last_name: str
-    age: int
-    sex: str
+class UserCreate(UserBase):
+    pass
 
 
-class UserUpdate(BaseModel):
-    first_name: str | None
-    last_name: str | None
+class UserUpdate(UserBase):
+    pass
