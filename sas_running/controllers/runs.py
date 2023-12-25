@@ -13,8 +13,10 @@ class RunController:
     def get_run_by_id(self, run_id: int) -> Run:
         return self.session.exec(select(Run).where(Run.id == run_id)).one()
 
-    def create_run(self,  run_create: RunCreate) -> Run:
-        new_run = Run(distance=run_create.distance, time=run_create.time, date=run_create.date)
+    def create_run(self, run_create: RunCreate) -> Run:
+        new_run = Run(
+            distance=run_create.distance, time=run_create.time, date=run_create.date
+        )
         self.session.add(new_run)
         self.session.commit()
         self.session.refresh(new_run)

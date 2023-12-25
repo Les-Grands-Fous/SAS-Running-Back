@@ -13,8 +13,13 @@ class UserController:
     def get_user_by_id(self, user_id: int) -> User:
         return self.session.exec(select(User).where(User.id == user_id)).one()
 
-    def create_user(self,  user_create: UserCreate) -> User:
-        new_user = User(first_name=user_create.first_name, last_name=user_create.last_name, birth_date=user_create.birth_date, gender=user_create.gender)
+    def create_user(self, user_create: UserCreate) -> User:
+        new_user = User(
+            first_name=user_create.first_name,
+            last_name=user_create.last_name,
+            birth_date=user_create.birth_date,
+            gender=user_create.gender,
+        )
         self.session.add(new_user)
         self.session.commit()
         self.session.refresh(new_user)
