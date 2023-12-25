@@ -1,5 +1,6 @@
 from sqlmodel import select
 
+from sas_running.models.runs import Run
 from sas_running.models.users import User, UserCreate, UserUpdate
 
 
@@ -40,3 +41,6 @@ class UserController:
         self.session.commit()
         self.session.refresh(user)
         return user
+
+    def get_user_runs(self, user_id):
+        return self.session.exec(select(Run).join(User).where(User.id == user_id)).all()

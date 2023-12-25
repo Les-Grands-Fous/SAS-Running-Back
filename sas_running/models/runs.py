@@ -14,7 +14,7 @@ class Run(RunBase, table=True):
 
 
 class RunCreate(RunBase):
-    pass
+    user_id: int
 
 
 class RunUpdate(RunBase):

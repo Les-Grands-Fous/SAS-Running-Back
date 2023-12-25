@@ -46,3 +46,12 @@ def update_user(
     user_controller: UserController = Depends(get_user_controller)
 ):
     return user_controller.update_user(user_id, user_update)
+
+
+@router.get("/{user_id}/runs")
+def get_user_runs(
+    *,
+    user_id: int,
+    user_controller: UserController = Depends(get_user_controller)
+):
+    return user_controller.get_user_runs(user_id)

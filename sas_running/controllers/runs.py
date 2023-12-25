@@ -15,7 +15,7 @@ class RunController:
 
     def create_run(self, run_create: RunCreate) -> Run:
         new_run = Run(
-            distance=run_create.distance, time=run_create.time, date=run_create.date
+            distance=run_create.distance, time=run_create.time, date=run_create.date, user_id=run_create.user_id
         )
         self.session.add(new_run)
         self.session.commit()
