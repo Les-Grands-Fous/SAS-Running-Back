@@ -12,8 +12,8 @@ class Gender(Enum):
 class UserBase(SQLModel):
     first_name: str
     last_name: str
-    birth_date: date
-    gender: Gender
+    birth_date: date | None = None
+    gender: Gender | None = None
 
 
 class User(UserBase, table=True):

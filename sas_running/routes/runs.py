@@ -1,7 +1,9 @@
+from http import HTTPStatus
+
 from fastapi import Depends, APIRouter
 from sas_running.controllers.runs import RunController
 from sas_running.dependencies import get_run_controller
-from sas_running.models.runs import RunCreate, RunUpdate
+from sas_running.models.runs import RunCreate, RunUpdate, Run
 
 router = APIRouter(
     prefix="/runs",
@@ -10,19 +12,19 @@ router = APIRouter(
 )
 
 
-@router.get("/")
+@router.get("/", response_model=list[Run])
 def get_runs(*, run_controller: RunController = Depends(get_run_controller)):
     return run_controller.get_runs()
 
 
-@router.get("/{run_id}")
+@router.get("/{run_id}", response_model=Run)
 def get_run_by_id(
     *, user_id: int, run_controller: RunController = Depends(get_run_controller)
 ):
     return run_controller.get_run_by_id(user_id)
 
 
-@router.post("/")
+@router.post("/", response_model=Run)
 def create_run(
     *,
     run_create: RunCreate,
@@ -31,7 +33,7 @@ def create_run(
     return run_controller.create_run(run_create)
 
 
-@router.delete("/{run_id}")
+@router.delete("/{run_id}", status_code=HTTPStatus.NO_CONTENT)
 def delete_run(
     *, run_id: int, run_controller: RunController = Depends(get_run_controller)
 ):

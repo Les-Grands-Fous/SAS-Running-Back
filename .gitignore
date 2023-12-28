@@ -307,5 +307,6 @@ pyrightconfig.json
 
 .idea
 database.db
+liste_of_users.xlsx
 
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm,visualstudiocode
