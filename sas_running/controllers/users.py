@@ -37,10 +37,14 @@ class UserController:
             user.first_name = user_update.first_name
         if user_update.last_name:
             user.last_name = user_update.last_name
+        if user_update.birth_date:
+            user.birth_date = user_update.birth_date
+        if user_update.gender:
+            user.gender = user_update.gender
         self.session.add(user)
         self.session.commit()
         self.session.refresh(user)
         return user
 
-    def get_user_runs(self, user_id):
+    def get_user_runs(self, user_id) -> list[Run]:
         return self.session.exec(select(Run).join(User).where(User.id == user_id)).all()
