@@ -131,7 +131,8 @@ def test_update_user(user_controller: UserController, session: Session):
 
 
 def test_get_user_runs(
-    user_controller: UserController, run_controller: RunController,
+    user_controller: UserController,
+    run_controller: RunController,
 ):
     current_date = datetime.date(2023, 12, 28)
     created_user = user_controller.create_user(
