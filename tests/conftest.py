@@ -1,7 +1,11 @@
 import pytest
+from faker import Faker
+from fastapi import FastAPI
 from sqlalchemy import create_engine
 from sqlmodel import SQLModel, Session
+from starlette.testclient import TestClient
 
+from sas_running.api import create_app
 from sas_running.controllers.runs import RunController
 from sas_running.controllers.users import UserController
 
@@ -28,3 +32,18 @@ def fixture_user_controller(session):
 @pytest.fixture(name="run_controller")
 def fixture_run_controller(session):
     return RunController(session)
+
+
+@pytest.fixture(name="faker")
+def get_faker() -> Faker:
+    return Faker("fr_FR")
+
+
+@pytest.fixture(name="app")
+def get_test_app() -> FastAPI:
+    return create_app()
+
+
+@pytest.fixture(name="client")
+def get_test_client(app: FastAPI) -> TestClient:
+    return TestClient(app)

@@ -19,9 +19,9 @@ def get_runs(*, run_controller: RunController = Depends(get_run_controller)):
 
 @router.get("/{run_id}", response_model=Run)
 def get_run_by_id(
-    *, user_id: int, run_controller: RunController = Depends(get_run_controller)
+    *, run_id: int, run_controller: RunController = Depends(get_run_controller)
 ):
-    return run_controller.get_run_by_id(user_id)
+    return run_controller.get_run_by_id(run_id)
 
 
 @router.post("/", response_model=Run)
