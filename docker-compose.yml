@@ -10,6 +10,12 @@ services:
       - 8000:8000
     depends_on:
       - db
+    environment:
+      - SAS_RUNNING_BACK_HOST=db
+      - SAS_RUNNING_BACK_PORT=5432
+      - SAS_RUNNING_BACK_DB_USER=user
+      - SAS_RUNNING_BACK_DB_PASSWORD=password
+      - SAS_RUNNING_BACK_DB_NAME=sas_running_db
 
   db:
     image: postgres:15-alpine
