@@ -1,9 +1,13 @@
 from sqlalchemy import create_engine
 from sqlmodel import SQLModel
 
-sqlite_file_name = "database.db"
-sqlite_url = f"sqlite:///{sqlite_file_name}"
+from sas_running.settings import Settings
 
-engine = create_engine(sqlite_url, echo=True)
+settings = Settings()
+if settings.env != "test":
+    sqlite_file_name = "database.db"
+    sqlite_url = f"postgresql://{settings.db_user}:{settings.db_password}@{settings.host}:{settings.port}/{settings.db_name}"
 
-SQLModel.metadata.create_all(engine)
+    engine = create_engine(sqlite_url, echo=True)
+
+    SQLModel.metadata.create_all(engine)

@@ -3,10 +3,10 @@ from sqlmodel import Session
 
 from sas_running.controllers.runs import RunController
 from sas_running.controllers.users import UserController
-from sas_running.database import engine
 
 
 def get_session():
+    from sas_running.database import engine
     with Session(engine) as session:
         yield session
 
