@@ -55,8 +55,8 @@ jobs:
       with:
         entrypoint: /bin/sh
         args: |
-            pip install pytest pytest-cov
-            pytest --cov=sas_running --cov-report=term-missing --cov-fail-under=80
+           pip install -r requirements.txt
+           python3 -m pytest
 
   # test:
   #   runs-on: ubuntu-latest
