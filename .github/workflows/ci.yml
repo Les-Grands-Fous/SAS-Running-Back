@@ -20,11 +20,11 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      
-    - name: Lint with Black and Flake8
-      run: |
-        docker run --rm -v $(pwd):/code -w /code python:3.9 bash -c "pip install flake8 black && black . && flake8 . --exclude=.git,__pycache__"
 
+    - name: Lint with Black
+      run: |
+        docker run --rm -v $(pwd):/code -w /code pyfound/black:latest black .
+    
   build:
     runs-on: ubuntu-latest
 
