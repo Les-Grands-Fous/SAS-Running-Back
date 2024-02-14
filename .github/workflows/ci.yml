@@ -42,7 +42,7 @@ jobs:
 
     - name: Build
       run: |
-        docker build -t Dockerfile .
+        docker build -t dockerfile .
 
 
   tests:
