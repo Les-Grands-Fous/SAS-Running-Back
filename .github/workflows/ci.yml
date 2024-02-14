@@ -42,7 +42,7 @@ jobs:
 
     - name: Build
       run: |
-        docker build -t dockerfile .
+        docker build -t sas_running_back .
 
 
   tests:
