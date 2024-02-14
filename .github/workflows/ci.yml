@@ -42,7 +42,7 @@ jobs:
 
     - name: Build
       run: |
-        docker run --rm -v $(pwd):/code -w /code python:3.12 bash -c "pip install -r requirements.txt && python build.py"
+        docker build -t . .
 
 
   tests:
@@ -58,7 +58,7 @@ jobs:
           - -c
           - |
             pip install pytest pytest-cov
-            pytest --cov=sas_running_back --cov-report=term-missing --cov-fail-under=80
+            pytest --cov=sas_running --cov-report=term-missing --cov-fail-under=80
 
   # test:
   #   runs-on: ubuntu-latest
