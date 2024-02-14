@@ -26,7 +26,7 @@ jobs:
         docker run --rm -v $(pwd):/code -w /code pyfound/black:latest black .
     - name: Lint with Ruff
       run: |
-        docker run --rm -v $(pwd):/code -w /code astral-sh/ruff:0.2.1 ruff .
+        docker run --rm -v $(pwd):/code -w /code pipeline-components/ruff:latest ruff .
 
   build:
     runs-on: ubuntu-latest
