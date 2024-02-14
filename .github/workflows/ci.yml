@@ -42,43 +42,44 @@ jobs:
 
     - name: Build
       run: |
-        docker run --rm -v $(pwd):/code -w /code python:3.9 bash -c "pip install -r requirements.txt && python build.py"
+        docker run --rm -v $(pwd):/code -w /code python:3.12 bash -c "pip install -r requirements.txt && python build.py"
 
 
-  test:
+  tests:
     runs-on: ubuntu-latest
-
-    services:
-      docker:
-        image: docker:19.03.12
-        options: --privileged
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: |
-        docker run --rm -v $(pwd):/code -w /code python:3.9 bash -c "pip install -r requirements.txt"
+    - name: Run tests with pytest and coverage
+      uses: docker://python:3.12
+      with:
+        entrypoint: /bin/sh
+        args: |
+          - -c
+          - |
+            pip install pytest pytest-cov
+            pytest --cov=sas_running_back --cov-report=term-missing --cov-fail-under=80
 
-    - name: Run tests
-      run: |
-        docker run --rm -v $(pwd):/code -w /code python:3.9 bash -c "pip install -r requirements.txt && pytest"
-  # tests:
+  # test:
   #   runs-on: ubuntu-latest
+
+  #   services:
+  #     docker:
+  #       image: docker:19.03.12
+  #       options: --privileged
+
   #   steps:
-  #   - uses: actions/checkout@v2
+  #   - name: Checkout code
+  #     uses: actions/checkout@v2
 
-  #   - name: Run tests with pytest and coverage
-  #     uses: docker://python:3.8
-  #     with:
-  #       entrypoint: /bin/sh
-  #       args: |
-  #         - -c
-  #         - |
-  #           pip install pytest pytest-cov
-  #           pytest --cov=my_package --cov-report=term-missing --cov-fail-under=80
+  #   - name: Install dependencies
+  #     run: |
+  #       docker run --rm -v $(pwd):/code -w /code python:3.9 bash -c "pip install -r requirements.txt"
 
+  #   - name: Run tests
+  #     run: |
+  #       docker run --rm -v $(pwd):/code -w /code python:3.9 bash -c "pip install -r requirements.txt && pytest"
+  
 # jobs:
 #   super-lint:
 #     name: Lint code base
